@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: vamshionrails/kubernetes-mesh
-          ref: v1.0
+          ref: master
           token: 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
           path: ./.github/actions/helloworld
           who-to-greet: 'Mona the Octocat'
