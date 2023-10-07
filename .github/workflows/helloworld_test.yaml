@@ -10,6 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-    - uses: vamshionrails/kubernetes-mesh@master
+    steps: 
+    - uses: ./.github/.actions/helloworld
     
