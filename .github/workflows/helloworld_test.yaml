@@ -20,5 +20,8 @@ jobs:
           ref: v1.0
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: ./.github/actions/helloworld
+          who-to-greet: 'Mona the Octocat'
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
       - name: Run my action
         uses: ./.github/actions/helloworld
