@@ -17,6 +17,7 @@ jobs:
         with:
           repository: vamshionrails/kubernetes-mesh
           ref: master
+          lss: true
           token: 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
           path: ./.github/actions/helloworld
           who-to-greet: 'Mona the Octocat'
