@@ -18,7 +18,7 @@ jobs:
         with:
           repository: vamshionrails/kubernetes-mesh
           ref: v1.0
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          token: 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
           path: ./.github/actions/helloworld
           who-to-greet: 'Mona the Octocat'
       - name: Get the output time
