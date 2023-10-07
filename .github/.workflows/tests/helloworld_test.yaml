@@ -1,6 +1,6 @@
 name: HelloWorld
 on:
-  pull_request
+  pull_request:
   push:
     branches:
       - master
@@ -9,4 +9,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: vamshionrails/kubernetes-mesh@master
-    
