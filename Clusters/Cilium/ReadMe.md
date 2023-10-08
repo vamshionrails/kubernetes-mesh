@@ -70,16 +70,14 @@ helm upgrade cilium cilium/cilium  \
 	--set ingressController.loadbalancerMode=shared \
 	--set bgpControlPlane.enabled=true \
 	--set operator.replicas=1 \
-	--set cni.chainingTarget=kindnet \
-	--set cni.chainingMode=generic-veth \
 	--set routingMode=native \
 	--set enableIPv4Masquerade=false \
 	--set enableIPv6Masquerade=false \
 	--set hubble.relay.enabled=true \
-    --set hubble.ui.enabled=true \
-    --set hubble.tls.auto.enabled=true \
-    --set hubble.tls.server.cert=false \
-    --set hubble.tls.auto.method=helm
+  --set hubble.ui.enabled=true \
+  --set hubble.tls.auto.enabled=true \
+  --set hubble.tls.server.cert=false \
+  --set hubble.tls.auto.method=helm
 
 
     =====================================
@@ -138,3 +136,15 @@ hubble:
       hosts:
         - hubble-ui.127.0.0.1.nip.io
 EOF
+
+
+
+helm upgrade cilium cilium/cilium  \
+	--namespace kube-system \
+	--set operator.replicas=1 \
+	--set kubeProxyReplacement=strict \    
+	--set hubble.relay.enabled=true \
+  --set hubble.ui.enabled=true \
+  --set hubble.tls.auto.enabled=true \
+  --set hubble.tls.server.cert=false \
+  --set hubble.tls.auto.method=helm

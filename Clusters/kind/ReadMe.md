@@ -1,6 +1,5 @@
-## Lab 01 - Deploy EKS clusters with Kind<a name="lab-01---deploy-eks-clusters-"></a> 
+## Deploy EKS clusters with Kind<a name="lab-01---deploy-eks-clusters-"></a>
 
- 
 ![EKS Setup](images/kind.png)
 
 * Deploy the first cluster
@@ -49,7 +48,7 @@ nodes:
 * Run in the command line
 
 ```shell
- 
+ Note:  kind create cluster --name vamshi --config kind-cluster1.yaml --image kindest/node:v1.28.0@sha256:b7a4cad12c197af3ba43202d3efe03246b3f0793f162afb40a33c923952d5b31
 kind create cluster --name=cluster1 --config=kind-cluster1.yaml --retain -v 1
 kind create cluster --name=cluster2 --config=kind-cluster2.yaml --retain -v 1
 ```
