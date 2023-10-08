@@ -24,7 +24,8 @@ helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 ```shell
 $ docker pull kindest/node:v1.28.0@sha256:b7a4cad12c197af3ba43202d3efe03246b3f0793f162afb40a33c923952d5b31
 $ docker.io/kindest/node@sha256:b7a4cad12c197af3ba43202d3efe03246b3f0793f162afb40a33c923952d5b31: Pulling from kindest/node
-
+```
+```shell
 $ $ kind create cluster --config cluster.yaml --image kindest/node:v1.28.0@sha256:b7a4cad12c197af3ba43202d3efe03246b3f0793f162afb40a33c923952d5b31
 Creating cluster "kubernetes-tools" ...
  ✓ Ensuring node image (kindest/node:v1.28.0) 🖼
@@ -40,10 +41,14 @@ kubectl cluster-info --context kind-kubernetes-tools
 
 Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
 
-
+```
+```shell
  
 $ kubectl create ns kubernetes-tools
 namespace/kubernetes-tools created
+
+```
+```shell
 
 $helm repo list
 NAME                    URL
@@ -75,13 +80,18 @@ Get the Kubernetes Dashboard URL by running:
   export POD_NAME=$(kubectl get pods -n kubernetes-dashboard -l "app.kubernetes.io/name=kubernetes-dashboard,app.kubernetes.io/instance=dashboard" -o jsonpath="{.items[0].metadata.name}")
   echo https://127.0.0.1:8443/
   kubectl -n kubernetes-dashboard port-forward $POD_NAME 8443:8443
- 
+```
+```shell
+
 $ kubectl proxy --address='0.0.0.0' --accept-hosts='^*$'
 Starting to serve on [::]:8001
 
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:dashboard-kubernetes-dashboard:https/proxy/#/login
 
+```
+![EKS Setup](images/login.png)
 
+```shell
 ![EKS Setup](images/login.png)
 
 Serviceaccount.yaml
@@ -113,8 +123,10 @@ clusterrolebinding.rbac.authorization.k8s.io/admin-user created
 
 $ kubectl -n kubernetes-dashboard create token admin-user
 eyJhbGciOiJSUzI1NiIsImtpZCI6IlFvXzVES2JlR1BkUWpLdUI5bjQtVE9NT2ticTc5WDdtcWo4ZnZEd0p5MDAifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjk2ODA0NDIyLCJpYXQiOjE2OTY4MDA4MjIsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJhZG1pbi11c2VyIiwidWlkIjoiMDcwNjRjNzAtYjk0NC00MDNjLWE3ZjAtMGNkYzYxOWEzNTkzIn19LCJuYmYiOjE2OTY4MDA4MjIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDphZG1pbi11c2VyIn0.EUh0ykAnFdMeAtaXcPHS4GeILoCDuXw4fYmyDN7PONQydnL0e9kRQD15Bvn60pXhyYD1gQ9JX0EwgkUHxhcSEgtWgAO9dUuX_xn0SNQmG04AalhSdfMTPoa5AimKd748aS2VTkNNWok0wsyPNImvnE_YndVGskhDQvux4VE_Nh5YtPSwfdLayWvpNt67PLeKh8pVf3__lRPJJB-BlpzErZzWt5e7jaZ7QlbPQpROSp-ZRgHVbDqElqFvMVuzKvj8dvupc6Aa_iyQMKz6TVk87du3mg-WmHmLm6cCak0hEQAOYJgiTaqGg5_ZQXTijUznTPYvbYnlohk0ozecJTcAyA
-
+```
 ![EKS Setup](images/Screenshot 2023-10-08 163437.png)
+```shell
+
 
 
   ```
