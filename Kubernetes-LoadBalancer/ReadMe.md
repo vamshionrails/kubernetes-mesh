@@ -199,3 +199,86 @@ hosts file
 ![EKS Setup](images/hw1.png)
 
 ![EKS Setup](images/hw2.png)
+
+
+
+* Secure Ingress with Cert manager
+
+```shell
+
+$ kubectl create namespace cert-manager
+namespace/cert-manager created
+
+$ helm repo add jetstack https://charts.jetstack.io
+"jetstack" has been added to your repositories
+
+
+$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "gloo-platform" chart repository
+...Successfully got an update from the "devtron" chart repository
+...Successfully got an update from the "nginx-stable" chart repository
+...Successfully got an update from the "kubernetes-dashboard" chart repository
+...Successfully got an update from the "ingress-nginx" chart repository
+...Successfully got an update from the "metallb" chart repository
+...Successfully got an update from the "jetstack" chart repository
+...Successfully got an update from the "eks" chart repository
+...Successfully got an update from the "cilium" chart repository
+...Successfully got an update from the "grafana" chart repository
+Update Complete. ⎈Happy Helming!⎈
+
+
+
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.13.1 --set installCRDs=true
+NAME: cert-manager
+LAST DEPLOYED: Sun Oct  8 18:37:35 2023
+NAMESPACE: cert-manager
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+cert-manager v1.13.1 has been deployed successfully!
+
+In order to begin issuing certificates, you will need to set up a ClusterIssuer
+or Issuer resource (for example, by creating a 'letsencrypt-staging' issuer).
+
+More information on the different types of issuers and how to configure them
+can be found in our documentation:
+
+https://cert-manager.io/docs/configuration/
+
+For information on how to configure cert-manager to automatically provision
+Certificates for Ingress resources, take a look at the `ingress-shim`
+documentation:
+
+https://cert-manager.io/docs/usage/ingress/
+
+
+
+$ kubectl apply -f production-issuer.yaml 
+clusterissuer.cert-manager.io/letsencrypt-prod created
+
+
+
+
+```
+
+```shell
+Append the  hello-kubernetes-ingress.yaml
+
+annotations:
+  kubernetes.io/ingress.class: nginx
+  cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts:
+    - hw1.localhost
+    - hw2.localhost
+    secretName: hello-kubernetes-tls
+
+
+    $ kubectl apply -f hello-kubernetes-ingress.yaml 
+ingress.networking.k8s.io/hello-kubernetes-ingress configured
+
+```
+
