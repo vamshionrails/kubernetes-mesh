@@ -1,20 +1,24 @@
 # helmfile.yaml
-# Author: Your Name
-# Description: Helmfile to manage Helm releases.
-
-helmDefaults:
-  wait: true
-  timeout: 300
-  kubeContext: <your-kube-context>
 
 repositories:
-  - name: owl-charts
-    url: https://github.com/your-username/your-charts-repo
+  - name: cilium
+    url: https://helm.cilium.io/
+  - name: kubernetes-dashboard
+    url: https://kubernetes.github.io/dashboard/
+
+context: <your-cluster-context>  # Specify the target Kubernetes cluster context
 
 releases:
-  - name: owldq
-    namespace: owldq
-    chart: owl-charts/owldq
-    version: "1.0.0"
+  - name: cilium
+    chart: cilium/cilium
+    version: <cilium_version>  # Specify the version you want
+    namespace: cilium-namespace  # Change to the desired namespace
     values:
-      - configs/config.json
+      - cilium-values.yaml  # Contents of cilium-values.yaml file
+
+  - name: kubernetes-dashboard
+    chart: kubernetes-dashboard/kubernetes-dashboard
+    version: <dashboard_version>  # Specify the version you want
+    namespace: dashboard-namespace  # Change to the desired namespace
+    values:
+      - k8s-dashboard-values.yaml  # Contents of k8s-dashboard-values.yaml file
